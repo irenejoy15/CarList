@@ -1,0 +1,4 @@
+.vs/*
+CarListApp.Maui/bin/*
+CarListApp.Maui/obj/*
+CarListApp.Maui/obj/Platforms/*
