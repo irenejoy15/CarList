@@ -7,11 +7,12 @@ using Xamarin.Google.Crypto.Tink.Signature;
 
 namespace CarListApp.Maui.Models
 {
-    public class Car
+
+    public class Car : BaseEntity
     {
-        public int CarId { get; set; }
+
         public string Make { get; set; }
         public string Model { get; set; }
-        public string Vin {  get; set; }
-    
+        public string Vin { get; set; }
+    }
 }
