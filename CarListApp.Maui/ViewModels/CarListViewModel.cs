@@ -1,5 +1,6 @@
 ﻿using CarListApp.Maui.Models;
 using CarListApp.Maui.Services;
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System;
 using System.Collections.Generic;
@@ -21,6 +22,9 @@ namespace CarListApp.Maui.ViewModels
             this.carService = carService;
         }
 
+        [ObservableProperty]
+        bool isRefreshing;
+
         [RelayCommand]
         async Task GetCarList()
         {
@@ -28,6 +32,7 @@ namespace CarListApp.Maui.ViewModels
             try
             {
                 IsLoading = true;
+                IsRefreshing = true;
                 if (Cars.Any()) Cars.Clear();
                 var cars = carService.GetCars();
                 foreach (var car in cars) Cars.Add(car);
@@ -40,6 +45,7 @@ namespace CarListApp.Maui.ViewModels
             finally
             {
                 IsLoading = false;
+                IsRefreshing = false;
             }
         }
     }
