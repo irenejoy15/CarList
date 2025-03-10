@@ -16,9 +16,9 @@ namespace CarListApp.Maui.ViewModels
 
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(IsNotLoading))]
-        bool isLoading;
+        private bool isLoading;
 
-        public bool IsNotLoading => !isLoading;
+        public bool IsNotLoading => !IsLoading;
 
        
      }   
