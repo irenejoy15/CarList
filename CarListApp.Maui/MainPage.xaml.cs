@@ -9,6 +9,9 @@ namespace CarListApp.Maui
         {
             InitializeComponent();
             BindingContext = carListViewModel;
+
+            //Preferences.Set("saveDetails", true);
+            //var detailsSaved = Preferences.Get("saveDetails", false);
         }
     }
 

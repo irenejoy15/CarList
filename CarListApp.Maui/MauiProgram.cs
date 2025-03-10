@@ -21,7 +21,9 @@ public static class MauiProgram
 #if DEBUG
 		builder.Logging.AddDebug();
 #endif
-		builder.Services.AddSingleton<CarService>();
+		string dbPath = Path.Combine(FileSystem.AppDataDirectory, "cars.db3");
+		builder.Services.AddSingleton(s=>ActivatorUtilities.CreateInstance<CarService>(s,dbPath));
+
         builder.Services.AddSingleton<CarListViewModel>();
 		builder.Services.AddTransient<CarDetailsViewModel>();
 

@@ -4,27 +4,42 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CarListApp.Maui.Models;
+using SQLite;
 
 namespace CarListApp.Maui.Services
 {
     public class CarService
     {
+        private SQLiteConnection conn;
+        string _dbPath;
+        public string StatusMessage;
+
+        public CarService(string dbPath)
+        {
+            _dbPath = dbPath;
+        }
+
+        private void Init()
+        {
+            if (conn != null)
+                return;
+            conn = new SQLiteConnection(_dbPath);
+            conn.CreateTable<Car>();
+        }
         public List<Car> GetCars()
         {
-            return new List<Car>() { 
-                new Car
-                {
-                    Id = 1 , Make = "Honda" , Model = "Fit", Vin="1234"
-                },
-                new Car
-                {
-                    Id = 2 , Make = "Honda1" , Model = "Fit", Vin="12345"
-                },
-                new Car
-                {
-                    Id = 3 , Make = "Honda3" , Model = "Fit", Vin="12346"
-                }
-            };
+           
+            try
+            {
+                Init();
+                return conn.Table<Car>().ToList();
+            }
+            catch(Exception)
+            {
+                StatusMessage = "Failed to retrieve data";
+            }
+            return new List<Car>();
+
         }
     }
 }
